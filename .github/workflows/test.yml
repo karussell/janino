@@ -4,10 +4,12 @@ jobs:
   publish:
     runs-on: ubuntu-18.04
     strategy:
+      fail-fast: false
       matrix:
         # 1.6, 6.0.83 -> Unsupported major.minor version 51.0
+        # 15, 16-ea   -> Source option 6 is no longer supported. Use 7 or later
         # reduce number to 5 as it seems to be the limit of the free version
-        java: [ 7.0.181, 8.0.192, 11.0.x, 15, 16-ea ]
+        java: [ 7.0.181, 8.0.192, 11.0.x ]
     name: JDK ${{ matrix.java }}
     steps:
       - uses: actions/checkout@v2
