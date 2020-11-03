@@ -5,7 +5,9 @@ jobs:
     runs-on: ubuntu-18.04
     strategy:
       matrix:
-        java: [ 1.6, 6.0.83, 7, 7.0.181, 8, 8.0.192, 9.0.x, 10, 11.0.x, 12, 13 ]
+        # 1.6, 6.0.83 -> Unsupported major.minor version 51.0
+        # reduce number to 5 as it seems to be the limit of the free version
+        java: [ 7.0.181, 8.0.192, 11.0.x, 15, 16-ea ]
     name: JDK ${{ matrix.java }}
     steps:
       - uses: actions/checkout@v2
@@ -21,4 +23,4 @@ jobs:
             ${{ runner.os }}-maven-
       - name: Test
         run: |
-          mvn -B clean install
+          cd janino-parent && mvn -B clean install
